@@ -21,7 +21,7 @@ exports.show = function(req, res) {
   var originalUrl = req.originalUrl;
     var remoteUrl = stripBaseFromString(baseUrl, originalUrl);
     if (validUrl.isWebUri(remoteUrl)) {
-      New.create({"originalUrl":remoteUrl}, function(err, item) {
+      New.create({"baseUrl":remoteUrl}, function(err, item) {
         if (err) {
           return res.status(401).send("Unable to generate shortUrl");
         }
