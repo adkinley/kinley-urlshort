@@ -2,7 +2,7 @@
 
 var _ = require('lodash');
 var New = require('./new.model');
-var validUrl = require('valid-url');
+//var validUrl = require('valid-url');
 // Get list of news
 exports.index = function(req, res) {
   New.find(function (err, news) {
@@ -11,7 +11,7 @@ exports.index = function(req, res) {
   });
 };
 
-
+var value = 1;
 function stripBaseFromString(base, original) {
   return original.replace(base,"");
 }
@@ -20,12 +20,13 @@ exports.show = function(req, res) {
   var baseUrl = req.baseUrl+"/";
   var originalUrl = req.originalUrl;
     var remoteUrl = stripBaseFromString(baseUrl, originalUrl);
-    if (validUrl.isWebUri(remoteUrl)) {
-      New.create({"baseUrl":remoteUrl}, function(err, item) {
+    if (true){//validUrl.isWebUri(remoteUrl)) {
+      New.create({"baseUrl":remoteUrl}, function(err, item) { //,"shortUrl":value
         if (err) {
           return res.status(401).send("Unable to generate shortUrl");
         }
 //        return res.status(200).json(item);
+value = value + 1;
      return res.send("<a href='"+remoteUrl+"'' target='_blank'>localhost:9000/" + item.shortUrl+"</a>");
      });
  
